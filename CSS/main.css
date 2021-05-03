@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    overflow: hidden;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+
+    background: #210124;
+}
+
+#main-cont{
+    height: 512px;
+
+    background: #750D37;
+}
+
+#itemsList{
+    height: 200px;
+
+    overflow-y: scroll;
+}
