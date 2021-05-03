@@ -1,0 +1,9 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+	<title>New Project</title>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: #09814a } 
+	</style>
+	<rect width="1920" height="1080" id="BG" style="fill: #121619" />
+	<path id="Shape 1" class="shp0" d="M327 1039C174.37 1039 51 915.63 51 763C51 610.37 174.37 487 327 487C479.63 487 603 610.37 603 763C603 915.63 479.63 1039 327 1039Z" />
+</svg>

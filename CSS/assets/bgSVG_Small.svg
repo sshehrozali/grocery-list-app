@@ -1,0 +1,9 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+	<title>New Project</title>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: #09814a } 
+	</style>
+	<rect width="1080" height="1920" id="Color Fill 1" style="fill: #121619" />
+	<path id="Shape 1" class="shp0" d="M269.66 2199.33C-83.52 2199.33 -369 1913.85 -369 1560.66C-369 1207.48 -83.52 922 269.66 922C622.85 922 908.33 1207.48 908.33 1560.66C908.33 1913.85 622.85 2199.33 269.66 2199.33Z" />
+</svg>

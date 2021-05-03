@@ -9,18 +9,65 @@
 body{
     width: 100vw;
     height: 100vh;
-
-    background: #210124;
 }
 
 #main-cont{
     height: 512px;
 
-    background: #750D37;
+    border-radius: 50px !important;
+    background: #121619 !important;
+    box-shadow:  20px 20px 60px #0f1315,
+             -20px -20px 60px #15191d !important;
 }
+
+#inputBox{
+    /* opacity: 2% !important; */
+}
+
+#addItem{
+    background: #09814A !important;
+    border-color: #035832 !important;
+}
+
+    #addItem:hover{
+        background: #034125 !important;
+    }
+
+    #addItem:focus{
+        box-shadow: none;
+    }
 
 #itemsList{
     height: 200px;
 
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+.modifiedCard{
+    /* background: none !important; */
+    border: 2px solid #2D4739 !important;
+    color: white !important;
+}
+
+/* Media Queries
+Phones, iPads, Tablets and Small Screens */
+@media screen and (max-width: 992px) {
+    body{
+        background: url(assets/bgSVG_Small.svg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+  }
+
+/* Large Screens, Laptops, Desktops */
+@media screen and (min-width: 992px) {
+    body{
+        background: url(assets/bgSVG_Large.svg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 }
