@@ -53,13 +53,18 @@ body{
 Phones, iPads, Tablets and Small Screens */
 @media screen and (max-width: 992px) {
     body{
+        /* background: #121619; */
         background: url(assets/bgSVG_Small.svg) no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
     }
-  }
+
+    #main-cont{
+        box-shadow: -20px -20px 60px #15191d5e !important;
+    }
+}
 
 /* Large Screens, Laptops, Desktops */
 @media screen and (min-width: 992px) {
