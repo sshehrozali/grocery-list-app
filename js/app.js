@@ -1,6 +1,9 @@
 let itemsListCounter = 0;   // Keep Counting total list items
 let itemID;     // Var to store item ID
 
+
+
+
 // Recall all data from Local Storage once the page is loaded
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -24,13 +27,23 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(storedItem, itemStatus, key);
 
 
+        // Call function
+        let ReturnedDiv = ReAddItems(storedItem, key);
 
-        ReAddItems(storedItem, itemStatus, key);
+        // Update each item status
+        if (itemStatus == "Active") {
+            ReturnedDiv.classList.add("modifiedCard");
+            ReturnedDiv.style.textDecoration = "none";
+
+        }
+
+        if (itemStatus == "Disable") {
+            ReturnedDiv.classList.add("disabledCard");
+            ReturnedDiv.style.textDecoration = "line-through";
+        }
 
     }
 });
-
-
 
 
 
@@ -51,7 +64,6 @@ document.getElementById("addItem").addEventListener("click", function () {
         document.getElementById("inputBox").value = "";
     }
 });
-
 
 
 
@@ -83,15 +95,13 @@ function createItem(item) {
 
 
 
-
-
 // Add new item in the list
 function newListItem(item) {
 
     // First create new item
     let ReturnedDiv = createItem(item);
 
-    localStorage.setItem(itemsListCounter, item);   // Add in Local Storage
+    localStorage.setItem(itemsListCounter, JSON.stringify([item, ""]));   // Add JSON in Local Storage
 
     ReturnedDiv.addEventListener("click", function () {
 
@@ -119,10 +129,8 @@ function newListItem(item) {
 
 
 
-
-
 // Readd Items in the list when DOM content is loaded
-function ReAddItems(item, currStatus, key) {
+function ReAddItems(item, key) {
 
     let ReloadedDiv = createItem(item);
 
@@ -145,4 +153,6 @@ function ReAddItems(item, currStatus, key) {
         }
 
     });
+
+    return ReloadedDiv;
 }
