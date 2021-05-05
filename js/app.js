@@ -1,4 +1,5 @@
 let itemsListCounter = 0;   // Keep Counting total list items
+let itemID;     // Var to store item ID
 
 // Recall all data from Local Storage once the page is loaded
 document.addEventListener("DOMContentLoaded", function () {
@@ -10,12 +11,31 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i = 1; i < localStorage.length + 1; i++) {
         itemsListCounter = localStorage.length;
 
-        storedItem = localStorage.getItem(i);
-        makeListItem(storedItem);
+
+        let retrieveItem = localStorage.getItem(i);   // Get item 
+        let JSONObj = JSON.parse(retrieveItem);       // Parse JSON
+
+        let storedItem = JSONObj[0];
+        let itemStatus = JSONObj[1];
+        let key = i;
+
+
+
+        console.log(storedItem, itemStatus, key);
+
+
+
+        ReAddItems(storedItem, itemStatus, key);
+
     }
 });
 
-// Add Item
+
+
+
+
+
+// When "Add Items" btn is clicked
 document.getElementById("addItem").addEventListener("click", function () {
 
     let item = document.getElementById("inputBox").value;
@@ -24,19 +44,20 @@ document.getElementById("addItem").addEventListener("click", function () {
 
         itemsListCounter = itemsListCounter + 1;
 
-        localStorage.setItem(itemsListCounter, item);   // Store in Local Storage
-
         // Call function
-        makeListItem(item);
+        newListItem(item);
 
         document.getElementById("sampleText").style.display = "none";
         document.getElementById("inputBox").value = "";
-
     }
 });
 
-// Function to make list item
-function makeListItem(item) {
+
+
+
+
+// Create new item
+function createItem(item) {
 
     let CardDiv = document.createElement("div");    // Create Main Card div
     CardDiv.classList.add("card");
@@ -48,23 +69,80 @@ function makeListItem(item) {
     InnerCardDiv.classList.add("modifiedCard");
     InnerCardDiv.classList.add("bg-transparent");
     InnerCardDiv.classList.add("itemText");
-    InnerCardDiv.innerText = item;      // Insert text
+
+    InnerCardDiv.innerText = item      // Insert text
     InnerCardDiv.setAttribute("id", itemsListCounter);       // Set ID of element
 
     CardDiv.appendChild(InnerCardDiv);
 
     document.getElementById("itemsList").appendChild(CardDiv);      // Append in the main list div
 
-    InnerCardDiv.addEventListener("click", function () {
+    return InnerCardDiv;
+}
 
-        if (InnerCardDiv.style.textDecoration == "line-through") {
-            InnerCardDiv.classList.remove("disabledCard");
-            InnerCardDiv.style.textDecoration = "none";
+
+
+
+
+
+// Add new item in the list
+function newListItem(item) {
+
+    // First create new item
+    let ReturnedDiv = createItem(item);
+
+    localStorage.setItem(itemsListCounter, item);   // Add in Local Storage
+
+    ReturnedDiv.addEventListener("click", function () {
+
+        itemID = ReturnedDiv.id;
+        console.log(itemID)
+
+        if (ReturnedDiv.style.textDecoration == "line-through") {
+            ReturnedDiv.classList.remove("disabledCard");
+            ReturnedDiv.style.textDecoration = "none";
+
+            // Update JSON 
+            localStorage.setItem(itemID, JSON.stringify([item, "Active"]));
         }
 
         else {
-            InnerCardDiv.classList.add("disabledCard");
-            InnerCardDiv.style.textDecoration = "line-through";
+            ReturnedDiv.classList.add("disabledCard");
+            ReturnedDiv.style.textDecoration = "line-through";
+
+            // Update JSON
+            localStorage.setItem(itemID, JSON.stringify([item, "Disable"]));
         }
+    });
+}
+
+
+
+
+
+
+// Readd Items in the list when DOM content is loaded
+function ReAddItems(item, currStatus, key) {
+
+    let ReloadedDiv = createItem(item);
+
+    ReloadedDiv.addEventListener("click", function () {
+
+        if (ReloadedDiv.style.textDecoration == "line-through") {
+            ReloadedDiv.classList.remove("disabledCard");
+            ReloadedDiv.style.textDecoration = "none";
+
+            // Update JSON 
+            localStorage.setItem(key, JSON.stringify([item, "Active"]));
+        }
+
+        else {
+            ReloadedDiv.classList.add("disabledCard");
+            ReloadedDiv.style.textDecoration = "line-through";
+
+            // Update JSON
+            localStorage.setItem(key, JSON.stringify([item, "Disable"]));
+        }
+
     });
 }
