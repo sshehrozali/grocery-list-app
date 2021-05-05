@@ -1,8 +1,8 @@
 let itemsListCounter = 0;   // Keep Counting total list items
 
 // Recall all data from Local Storage once the page is loaded
-document.addEventListener("DOMContentLoaded", function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
+
     if (localStorage.length != 0) {
         document.getElementById("sampleText").style.display = "none";
     }
@@ -13,13 +13,13 @@ document.addEventListener("DOMContentLoaded", function() {
         storedItem = localStorage.getItem(i);
         makeListItem(storedItem);
     }
-  });
+});
 
 // Add Item
-document.getElementById("addItem").addEventListener("click", function() {
+document.getElementById("addItem").addEventListener("click", function () {
 
     let item = document.getElementById("inputBox").value;
-    
+
     if (item != "") {
 
         itemsListCounter = itemsListCounter + 1;
@@ -37,7 +37,7 @@ document.getElementById("addItem").addEventListener("click", function() {
 
 // Function to make list item
 function makeListItem(item) {
-    
+
     let CardDiv = document.createElement("div");    // Create Main Card div
     CardDiv.classList.add("card");
     CardDiv.classList.add("mt-3");
@@ -47,10 +47,24 @@ function makeListItem(item) {
     InnerCardDiv.classList.add("card-body");
     InnerCardDiv.classList.add("modifiedCard");
     InnerCardDiv.classList.add("bg-transparent");
+    InnerCardDiv.classList.add("itemText");
     InnerCardDiv.innerText = item;      // Insert text
     InnerCardDiv.setAttribute("id", itemsListCounter);       // Set ID of element
 
     CardDiv.appendChild(InnerCardDiv);
 
     document.getElementById("itemsList").appendChild(CardDiv);      // Append in the main list div
+
+    InnerCardDiv.addEventListener("click", function () {
+
+        if (InnerCardDiv.style.textDecoration == "line-through") {
+            InnerCardDiv.classList.remove("disabledCard");
+            InnerCardDiv.style.textDecoration = "none";
+        }
+
+        else {
+            InnerCardDiv.classList.add("disabledCard");
+            InnerCardDiv.style.textDecoration = "line-through";
+        }
+    });
 }
